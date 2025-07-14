@@ -3,6 +3,7 @@ use raylib::prelude::*;
 use crate::player::Player;
 
 mod player;
+mod traits;
 fn main() {
     let (mut rl, thread) = raylib::init()
         .size(640, 480)
