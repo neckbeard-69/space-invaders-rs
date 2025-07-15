@@ -43,7 +43,7 @@ impl Player {
     }
 
     fn fire_bullet(&mut self) {
-        let mut bullet = Bullet::new(self.position.x, self.position.y + 40.0);
+        let bullet = Bullet::new(self.position.x, self.position.y + 40.0);
         self.bullets.push(bullet);
     }
 
