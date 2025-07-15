@@ -16,10 +16,10 @@ impl Bullet {
     pub fn update(&mut self) {
         self.position.y -= self.speed;
     }
-    pub fn draw(&self, d: &mut RaylibDrawHandle) {
+    pub fn draw(&self, d: &mut RaylibDrawHandle, player_width: f32, player_height: f32) {
         let rec = Rectangle {
-            x: self.position.x,
-            y: self.position.y,
+            x: self.position.x + (player_width / 2.0),
+            y: self.position.y - player_height,
             width: self.size,
             height: self.size,
         };

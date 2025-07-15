@@ -59,6 +59,12 @@ impl Player {
             self.fire_bullet();
         }
     }
+    pub fn get_player_width(&self) -> f32 {
+        self.texture.width as f32 / 10.0
+    }
+    pub fn get_player_height(&self) -> f32 {
+        self.texture.height as f32 / 10.0
+    }
 }
 
 impl Damageable for Player {

@@ -18,17 +18,19 @@ fn main() {
     rl.set_window_size(width - (offset as i32), height - (offset as i32));
 
     let mut player = Player::new(&mut rl, &thread, (width / 2) as f32, (height - 200) as f32);
-    let enemy_count = 4;
+    let enemy_count = 64;
     let mut enemies: Vec<Enemy> = Vec::with_capacity(enemy_count);
-    for i in 0..enemy_count {
-        enemies.push(Enemy::new(
-            &mut rl,
-            &thread,
-            (10 * i + 10) as f32,
-            (10 * i + 10) as f32,
-            20,
-            20,
-        ));
+    let mut current_x = 50.0;
+    let mut current_y = 50.0;
+    let gap = 80.0;
+    let num_on_row = 16;
+    for i in 1..=enemy_count {
+        enemies.push(Enemy::new(&mut rl, &thread, current_x, current_y, 20, 20));
+        current_x += gap;
+        if i % num_on_row == 0 {
+            current_y += 100.0;
+            current_x = 50.0;
+        }
     }
 
     while !rl.window_should_close() {
@@ -45,7 +47,11 @@ fn main() {
         // TODO: remove them when hitting a player too
         player.bullets.retain(|b| !b.is_off_screen());
         for bullet in &player.bullets {
-            bullet.draw(&mut d);
+            bullet.draw(
+                &mut d,
+                player.get_player_width(),
+                player.get_player_height(),
+            );
         }
     }
 }
